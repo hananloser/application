@@ -1,13 +1,9 @@
 <?php
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-
 defined('BASEPATH') or exit('No direct script access allowed');
 class Upload extends CI_Controller
-
-
 {
-    //index 
+    //index
     public function index()
     {
         check_not_login();
@@ -16,9 +12,9 @@ class Upload extends CI_Controller
     //query for cek duplicate data
     public function del_empty_row()
     {
-        $this->db->query('DELETE FROM data_uploaded 
-        WHERE Country = "" OR 
-        Employee_Size = "" OR 
+        $this->db->query('DELETE FROM data_uploaded
+        WHERE Country = "" OR
+        Employee_Size = "" OR
         Industry_Type = "" OR
         Revenue_Size =""'); //
     }
@@ -27,7 +23,7 @@ class Upload extends CI_Controller
         $this->db->query('DELETE t1 FROM data_uploaded t1
         INNER JOIN data_uploaded  t2
         WHERE
-        t1.ID < t2.ID AND 
+        t1.ID < t2.ID AND
         t1.Email_Addr = t2.Email_Addr AND
         t1.Valid_Check = t2.Valid_Check');
         sleep(2);
@@ -35,6 +31,7 @@ class Upload extends CI_Controller
     // file upload functionality
     public function import()
     {
+        $this->template->load('template', 'v_upload');
         include APPPATH . 'third_party/PHPExcel/Classes/PHPExcel.php';
         include APPPATH . 'third_party/PHPExcel/Classes/PHPExcel/Reader/Excel2007.php';
         include APPPATH . 'third_party/PHPExcel/Classes/PHPExcel/IOfactory.php';
@@ -48,9 +45,9 @@ class Upload extends CI_Controller
         if (!$this->upload->do_upload()) {
 
             //upload gagal
-            //cek inputan dan konigurasi 
+            //cek inputan dan konigurasi
             echo
-                "<script>
+            "<script>
 				alert('Silahkan Input File terlebih dahulu');
 				window.location='" . site_url('upload') . "';
 				</script>";
@@ -69,10 +66,10 @@ class Upload extends CI_Controller
                 $Fname = $row['D'];
                 $Lname = $row['E'];
                 $Cname = $row['C'];
-                $S_Fname = substr($Fname, 0, 3); // Ambil 3 huruf dari index  0 , 3 
+                $S_Fname = substr($Fname, 0, 3); // Ambil 3 huruf dari index  0 , 3
                 $S_Lname = substr($Lname, 0, 3);
                 $S_Cname = substr($Cname, 0, 3);
-                // Gabung String 
+                // Gabung String
                 $concatenate = $S_Fname . $S_Lname . $S_Cname;
                 $getdate = date('d-m-Y');
                 $CreatedBy = $this->session->userdata('username');
@@ -100,45 +97,22 @@ class Upload extends CI_Controller
                         'Linked_In_Link' => $row['S'],
                         'Valid_Check' => $concatenate,
                         'Created_At' => $getdate,
-                        'Uploaded_By' => $CreatedBy
+                        'Uploaded_By' => $CreatedBy,
                     ));
                 }
                 $numrow++;
             }
 
-            // foreach ($data as $no => $item) {
-            //     # code...
-            //     foreach ($item as $key => $value) {
-            //         # code...menampilkan semua nilai array
-            //         //untuk cek nilai field yang kosong di sini setelah di looping->setelah itu push data
-            //         // echo "<pre>";
-            //         // echo  "Field = " . $key . " bernilai => "  . $value['0'];
-            //         //echo "index ke - " . "" . $no . " dengan sub_indexnya = " . $key . " di dapat Nilainya adalah = " . $value . "<br>";
-
-            //     }
-            // }
-            // echo "<pre>";
-            // print_r($data);
-
-
-
-            // unlink(realpath('excel/' . $data_upload['file_name']));
-            // die;
-            // Filter Data Test
-            // function filter_data($array)
-            // {
-            //     $container = [];
-            //     foreach ($array as $key => $item) {
-            //         if (array_search($array[$key], $array) === true) {
-            //             array_push($container, $array[$key]);
-            //         }
-            //     }
-            //     return $container;
-            // }
-            // $newdata2 = array_map(function ($arr) {
-            //     return $arr['Country'] == '1';
-            // }, $data);
-
+            foreach ($data as $key => $value) {
+                if ($value['Campaign_ID'] == null && $value['Date'] == null) {
+                    echo
+                    "<script>
+						alert('Error , Some Row is Null ');
+						window.location='" . site_url('upload') . "';
+                    </script>";
+                }
+			}
+			
             $this->load->model('Upload_m');
             $process = $this->Upload_m->insert_multiple($data);
             unlink(realpath('excel/' . $data_upload['file_name']));
@@ -146,13 +120,13 @@ class Upload extends CI_Controller
             $this->del_empty_row();
             if (!$process) {
                 echo
-                    "<script>
+                "<script>
                 	alert('Proses Import Berhasil Berhasil');
                 	window.location='" . site_url('view/userview') . "';
                     </script>";
             } else {
                 echo
-                    "<script>
+                "<script>
                 	alert('Error');
                 	window.location='" . site_url('upload') . "';
                     </script>";
