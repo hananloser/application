@@ -105,11 +105,9 @@ class Upload extends CI_Controller
 
             foreach ($data as $key => $value) {
                 if ($value['Campaign_ID'] == null && $value['Date'] == null) {
-                    echo
-                    "<script>
-						alert('Error , Some Row is Null ');
-						window.location='" . site_url('upload') . "';
-                    </script>";
+					
+					// Sisipkan Di sini flash data nya setalah itu di redirect ke halaman dashboard
+
                 }
 			}
 			
