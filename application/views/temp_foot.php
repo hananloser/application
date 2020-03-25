@@ -26,6 +26,7 @@
 <script src="<?php echo base_url('assets/') ?>plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="<?php echo base_url('assets/') ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="<?php echo base_url('assets/') ?>plugins/sweetalert2/sweetalert2.all.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/') ?>dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
