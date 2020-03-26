@@ -31,7 +31,6 @@ class Upload extends CI_Controller
     // file upload functionality
     public function import()
     {
-        $this->template->load('template', 'v_upload');
         include APPPATH . 'third_party/PHPExcel/Classes/PHPExcel.php';
         include APPPATH . 'third_party/PHPExcel/Classes/PHPExcel/Reader/Excel2007.php';
         include APPPATH . 'third_party/PHPExcel/Classes/PHPExcel/IOfactory.php';
@@ -104,13 +103,13 @@ class Upload extends CI_Controller
             }
 
             foreach ($data as $key => $value) {
-                if ($value['Campaign_ID'] == null && $value['Date'] == null) {
-					
-					// Sisipkan Di sini flash data nya setalah itu di redirect ke halaman dashboard
-
+                if ($value['Campaign_ID'] == null) {
+                    $this->session->set_flashdata('error', 'ada Row Yang error');
+                    redirect('Dashboard/index');
                 }
-			}
-			
+            }
+
+            die();
             $this->load->model('Upload_m');
             $process = $this->Upload_m->insert_multiple($data);
             unlink(realpath('excel/' . $data_upload['file_name']));
