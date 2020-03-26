@@ -2,7 +2,7 @@
 
 
 ## Todo
-* [ ] Cek Row Excel Yang Akan Di Upload Jika Nilai Nya Kosong
+* [x] Cek Row Excel Yang Akan Di Upload Jika Nilai Nya Kosong
 
 
 
