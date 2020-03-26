@@ -106,10 +106,8 @@ class Upload extends CI_Controller
                 if ($value['Campaign_ID'] == null) {
                     $this->session->set_flashdata('error', 'ada Row Yang error');
                     redirect('Dashboard/index');
-                }
+				}
             }
-
-            die();
             $this->load->model('Upload_m');
             $process = $this->Upload_m->insert_multiple($data);
             unlink(realpath('excel/' . $data_upload['file_name']));
