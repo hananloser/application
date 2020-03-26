@@ -72,7 +72,7 @@
             <img src="<?php echo base_url('assets/') ?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?= $this->fungsi->user_login()->user_company_name ?></a>
+            <a href="#" class="d-block"><?=$this->fungsi->user_login()->user_company_name?></a>
           </div>
         </div>
 
@@ -90,35 +90,35 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <?php if ($this->session->userdata('level') == 1) { ?>
+                <?php if ($this->session->userdata('level') == 1) {?>
                   <li class="nav-item">
-                    <a href="<?= site_url('dashboard/manage_user') ?>" class="nav-link">
+                    <a href="<?=site_url('dashboard/manage_user')?>" class="nav-link">
                       <i class="fas fa-users-cog nav-icon"></i>
                       <p>Manage User</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="<?= site_url('dashboard/manage_data') ?>" class="nav-link">
+                    <a href="<?=site_url('dashboard/manage_data')?>" class="nav-link">
                       <i class="fas fa-database nav-icon"></i>
                       <p>Manage Database</p>
                     </a>
                   </li>
-                <?php } ?>
+                <?php }?>
                 <!--sesi ini membatasi hak akses user, cek kode pada controller auth/login, periksa juga pada helper-->
-                <?php if ($this->session->userdata('level') == 2) { ?>
+                <?php if ($this->session->userdata('level') == 2) {?>
                   <li class="nav-item">
-                    <a href="<?= site_url('dashboard/go_upload') ?>" class="nav-link">
+                    <a href="<?=site_url('dashboard/go_upload')?>" class="nav-link">
                       <i class="fas fa-upload nav-icon"></i>
                       <p>Upload Data</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="<?= site_url('dashboard/view_list') ?>" class="nav-link">
+                    <a href="<?=site_url('dashboard/view_list')?>" class="nav-link">
                       <i class="fas fa-eye nav-icon"></i>
                       <p>View list</p>
                     </a>
                   </li>
-                <?php } ?>
+                <?php }?>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="fas fa-user nav-icon"></i>
@@ -126,7 +126,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?= site_url('auth/logout') ?>" class="nav-link">
+                  <a href="<?=site_url('auth/logout')?>" class="nav-link">
                     <i class="fas fa-sign-out-alt nav-icon"></i>
                     <p>Log-out</p>
                   </a>
@@ -208,8 +208,14 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $('#table').DataTable();
+			<?php if ($this->session->flashdata('error')) {?>
+				Swal.fire({
+					icon: 'error',
+					title: 'Row in Excel is Null Or Empty Field',
+					text: 'Check your upload Data',
+				})
+			<?php }?>
     });
   </script>
 </body>
-
 </html>
