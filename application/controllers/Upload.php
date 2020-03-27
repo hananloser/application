@@ -28,7 +28,11 @@ class Upload extends CI_Controller
         t1.Valid_Check = t2.Valid_Check');
         sleep(1);
     }
-    // file upload functionality
+
+    /**
+     * void
+     */
+
     public function import()
     {
         include APPPATH . 'third_party/PHPExcel/Classes/PHPExcel.php';
@@ -42,14 +46,11 @@ class Upload extends CI_Controller
         $this->upload->initialize($config);
         // buat fungsi untuk kode validasi
         if (!$this->upload->do_upload()) {
-
             //upload gagal
-            //cek inputan dan konigurasi
-            echo
-            "<script>
-				alert('Silahkan Input File terlebih dahulu');
-				window.location='" . site_url('upload') . "';
-				</script>";
+            $this->session->set_flashdata('error', 'Field cannot is Empty Select the File');
+            echo "<script>
+			window.location='" . site_url('upload') . "';
+			</script>";
         } else {
             $data_upload = $this->upload->data();
 
@@ -70,7 +71,7 @@ class Upload extends CI_Controller
                 $S_Cname = substr($Cname, 0, 3);
                 // Gabung String
                 $concatenate = $S_Fname . $S_Lname . $S_Cname;
-                $getdate = date('d-m-Y');
+                $getdate = date('Y-m-d');
                 $CreatedBy = $this->session->userdata('username');
                 // If Ini Tedk Perlu
                 if ($numrow > 1) {
@@ -124,10 +125,8 @@ class Upload extends CI_Controller
                 !is_null($value['Linked_In_Link']);
             }
 
-			$new = array_filter($data, 'filter');
-			
-			
-            $count = count($new);
+            $new = array_filter($data, 'filter');
+			$count = count($new);
             $this->load->model('Upload_m');
             $process = $this->Upload_m->insert_multiple($new);
             unlink(realpath('excel/' . $data_upload['file_name']));
