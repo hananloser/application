@@ -26,7 +26,7 @@ class Upload extends CI_Controller
         t1.ID < t2.ID AND
         t1.Email_Addr = t2.Email_Addr AND
         t1.Valid_Check = t2.Valid_Check');
-        sleep(2);
+        sleep(1);
     }
     // file upload functionality
     public function import()
@@ -102,29 +102,43 @@ class Upload extends CI_Controller
                 $numrow++;
             }
 
-            foreach ($data as $key => $value) {
-                if ($value['Campaign_ID'] == null) {
-                    $this->session->set_flashdata('error', 'ada Row Yang error');
-                    redirect('Dashboard/index');
-				}
+            function filter($value)
+            {
+                return !is_null($value['Campaign_ID']) &&
+                !is_null($value['Revenue_Size']) &&
+                !is_null($value['Date']) &&
+                !is_null($value['First_Name']) &&
+                !is_null($value['Last_Name']) &&
+                !is_null($value['Job_Tittle']) &&
+                !is_null($value['Email_Addr']) &&
+                !is_null($value['Primary_Phone']) &&
+                !is_null($value['Address']) &&
+                !is_null($value['City']) &&
+                !is_null($value['State']) &&
+                !is_null($value['Zip']) &&
+                !is_null($value['Country']) &&
+                !is_null($value['Employee_Size']) &&
+                !is_null($value['Sic_Code']) &&
+                !is_null($value['Naics_Code']) &&
+                !is_null($value['Revenue_Size']) &&
+                !is_null($value['Linked_In_Link']);
             }
+
+			$new = array_filter($data, 'filter');
+			
+			
+            $count = count($new);
             $this->load->model('Upload_m');
-            $process = $this->Upload_m->insert_multiple($data);
+            $process = $this->Upload_m->insert_multiple($new);
             unlink(realpath('excel/' . $data_upload['file_name']));
             $this->delduplicate();
-            $this->del_empty_row();
+            // $this->del_empty_row();
             if (!$process) {
-                echo
-                "<script>
-                	alert('Proses Import Berhasil Berhasil');
-                	window.location='" . site_url('view/userview') . "';
-                    </script>";
+                $this->session->set_flashdata('success', $count);
+                redirect('view/userview');
             } else {
-                echo
-                "<script>
-                	alert('Error');
-                	window.location='" . site_url('upload') . "';
-                    </script>";
+                $this->session->set_flashdata('error', 'Field cannot is Empty Select the File');
+                redirect('Dashboard/index');
             }
         }
     }

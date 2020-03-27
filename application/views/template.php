@@ -212,7 +212,14 @@
 				Swal.fire({
 					icon: 'error',
 					title: 'Row in Excel is Null Or Empty Field',
-					text: 'Check your upload Data',
+					text: <?= $this->session->flashdata('error') ?>,
+				})
+			<?php }?>
+			<?php if ($this->session->flashdata('success')) {?>
+				Swal.fire({
+					icon: 'error',
+					title: 'Data is Success inserting',
+					text: <?= $this->session->flashdata('success') ?>,
 				})
 			<?php }?>
     });
