@@ -208,6 +208,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $('#table').DataTable();
+			// Cek Error
 			<?php if ($this->session->flashdata('error')) {?>
 				Swal.fire({
 					icon: 'error',
@@ -215,6 +216,7 @@
 					text: <?= $this->session->flashdata('error') ?>,
 				})
 			<?php }?>
+			// Jika Success 
 			<?php if ($this->session->flashdata('success')) {?>
 				Swal.fire({
 					icon: 'error',
