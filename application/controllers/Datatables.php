@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Datatables extends CI_Controller
+class Datatable extends CI_Controller
 {
 
 
