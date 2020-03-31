@@ -186,6 +186,7 @@
   <!-- daterangepicker -->
   <script src="<?php echo base_url('assets/') ?>plugins/moment/moment.min.js"></script>
   <script src="<?php echo base_url('assets/') ?>plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="<?php echo base_url('assets/') ?>plugins/pdfmake/pdfmake.js"></script>
   <!-- Tempusdominus Bootstrap 4 -->
   <script src="<?php echo base_url('assets/') ?>plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
   <!-- Summernote -->
@@ -205,50 +206,58 @@
     let method, table;
     $(document).ready(function() {
       table = $('#table').DataTable({
-        // "processing": true,
-        // "serverSide": true,
-        // "ajax": {
-        //   "url": "<?= site_url('/api') ?>",
-        //   "type": 'POST'
-        // },
-        // //Set column definition initialisation properties.
-        // columns: [{
-        //     data: "ID"
-        //   },
-        //   {
-        //     data: "Company_Name",
-        //   },
-        //   {
-        //     data: "First_Name"
-        //   },
-        //   {
-        //     data: "Last_Name"
-        //   },
-        //   {
-        //     data: "Valid_Check",
-        //     orderable: true
-        //   },
-        // ],
-        // columnDefs: [{
-        //   'targets': 0,
-        //   'searchable': true,
-        //   'orderable': true,
-        //   search: true
-        // }],
-
-        "bServerSide": true,
-        "bProcessing": true,
-        "sPaginationType": "full_numbers",
-        "bFilter": true,
-        "sServerMethod": "POST",
-        "sAjaxSource": "<?= site_url('/api') ?>",
-        "iDisplayLength": 5,
-        "aLengthMenu": [
-          [5, 25, 50, -1],
-          [5, 25, 50, "All"]
+        "processing": true,
+        "serverSide": true,
+        searchable: true,
+        "ajax": {
+          "url": "<?= site_url('/api') ?>",
+          "type": 'POST'
+        },
+        //Set column definition initialisation properties.
+        columns: [{
+            data: "ID"
+          },
+          {
+            data: "Company_Name",
+          },
+          {
+            data: "First_Name"
+          },
+          {
+            data: "Last_Name"
+          },
+          {
+            data: "Valid_Check",
+            orderable: true
+          },
         ],
-        "sEcho": 1,
-        
+        columnDefs: [{
+          'targets': 0,
+          'orderable': true,
+          search: true
+        }],
+        // "bServerSide": true,
+        // "bProcessing": true,
+        // "sPaginationType": "full_numbers",
+        // "bFilter": true,
+        // "sServerMethod": "POST",
+        // "sAjaxSource": "<?= site_url('/api') ?>",
+        // "iDisplayLength": 5,
+        // "aLengthMenu": [
+        //   [5, 25, 50, -1],
+        //   [5, 25, 50, "All"]
+        // ],
+        // "sEcho": 1,
+        // 'fnServerData': function(sSource, aoData, fnCallback) {
+        //   $.ajax({
+        //     'dataType': 'json',
+        //     'type': 'POST',
+        //     'url': sSource,
+        //     'data': aoData,
+        //     'success': fnCallback
+        //   }); //end of ajax
+
+        // }
 
       });
       // Cek Error

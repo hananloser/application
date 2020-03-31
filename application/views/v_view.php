@@ -38,7 +38,7 @@
                                 <th>Company Name</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Valid_Check</th>
+                                <th>Token</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,7 +50,7 @@
                                 <th>Company Name</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Valid_Check</th>
+                                <th>Token</th>
                             </tr>
                         </tfoot>
                     </table>
