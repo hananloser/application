@@ -31,7 +31,6 @@ class Upload extends CI_Controller
     /**
      * void
      */
-
     public function import()
     {
         include APPPATH . 'third_party/PHPExcel/Classes/PHPExcel.php';
@@ -41,7 +40,7 @@ class Upload extends CI_Controller
         $file = $_FILES['userfile']['name'];
         $config['upload_path'] = realpath('excel');
         $config['allowed_types'] = 'xlsx|xls|csv';
-        $config['max_size'] = '1024';
+        $config['max_size'] = '5120';
         $this->upload->initialize($config);
         // buat fungsi untuk kode validasi
         if (!$this->upload->do_upload()) {
