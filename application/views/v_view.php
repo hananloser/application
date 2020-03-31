@@ -31,30 +31,28 @@
             <div class="box">
                 <div class="box-body table-responsive">
                     <!--  -->
-                    <table id="table" class="table table-hover table-striped" name="user_table">
-                        <thead class="table table-bordered">
+                    <table id="table" class="table" style="width:100%" name="user_table">
+                        <thead>
                             <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Company Name</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Token</th>
+                                <th>No</th>
+                                <th>Company Name</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Valid_Check</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $no = 1;
-                            foreach ($row as $u) {
-                            ?>
-                                <tr>
-                                    <th scope="row"><?php echo $no++ ?></th>
-                                    <td><?php echo $u->Company_Name ?></td>
-                                    <td><?php echo $u->First_Name ?></td>
-                                    <td><?php echo $u->Last_Name ?></td>
-                                    <td><?php echo $u->Valid_Check ?></td>
-                                </tr>
-                            <?php } ?>
+
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>No</th>
+                                <th>Company Name</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Valid_Check</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

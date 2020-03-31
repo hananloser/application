@@ -11,7 +11,7 @@
   <!-- Font Awesome -->
   <link rel=" stylesheet" href="<?php echo base_url('assets/') ?>plugins/fontawesome-free/css/all.min.css">
   <!-- summernote -->
-  <link rel="stylesheet" href="<?php echo base_url('assets/') ?>plugins/mdb/mdb.lite.min.css">
+  <!-- <link rel="stylesheet" href="<?php echo base_url('assets/') ?>plugins/mdb/mdb.lite.min.css"> -->
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bbootstrap 4 -->
@@ -31,7 +31,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url('assets/') ?>plugins/summernote/summernote-bs4.css">
 
-	<link rel="stylesheet" href="<?php echo base_url('assets/') ?>plugins/sweetalert2/sweetalert2.css">
+  <link rel="stylesheet" href="<?php echo base_url('assets/') ?>plugins/sweetalert2/sweetalert2.css">
 
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -72,7 +72,7 @@
             <img src="<?php echo base_url('assets/') ?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?=$this->fungsi->user_login()->user_company_name?></a>
+            <a href="#" class="d-block"><?= $this->fungsi->user_login()->user_company_name ?></a>
           </div>
         </div>
 
@@ -90,35 +90,35 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <?php if ($this->session->userdata('level') == 1) {?>
+                <?php if ($this->session->userdata('level') == 1) { ?>
                   <li class="nav-item">
-                    <a href="<?=site_url('dashboard/manage_user')?>" class="nav-link">
+                    <a href="<?= site_url('dashboard/manage_user') ?>" class="nav-link">
                       <i class="fas fa-users-cog nav-icon"></i>
                       <p>Manage User</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="<?=site_url('dashboard/manage_data')?>" class="nav-link">
+                    <a href="<?= site_url('dashboard/manage_data') ?>" class="nav-link">
                       <i class="fas fa-database nav-icon"></i>
                       <p>Manage Database</p>
                     </a>
                   </li>
-                <?php }?>
+                <?php } ?>
                 <!--sesi ini membatasi hak akses user, cek kode pada controller auth/login, periksa juga pada helper-->
-                <?php if ($this->session->userdata('level') == 2) {?>
+                <?php if ($this->session->userdata('level') == 2) { ?>
                   <li class="nav-item">
-                    <a href="<?=site_url('dashboard/go_upload')?>" class="nav-link">
+                    <a href="<?= site_url('dashboard/go_upload') ?>" class="nav-link">
                       <i class="fas fa-upload nav-icon"></i>
                       <p>Upload Data</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="<?=site_url('dashboard/view_list')?>" class="nav-link">
+                    <a href="<?= site_url('dashboard/view_list') ?>" class="nav-link">
                       <i class="fas fa-eye nav-icon"></i>
                       <p>View list</p>
                     </a>
                   </li>
-                <?php }?>
+                <?php } ?>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="fas fa-user nav-icon"></i>
@@ -126,7 +126,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?=site_url('auth/logout')?>" class="nav-link">
+                  <a href="<?= site_url('auth/logout') ?>" class="nav-link">
                     <i class="fas fa-sign-out-alt nav-icon"></i>
                     <p>Log-out</p>
                   </a>
@@ -168,25 +168,21 @@
   <!-- jQuery -->
   <script src="<?php echo base_url('assets/') ?>plugins/jquery/jquery.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
-  <script src="<?php echo base_url('assets/') ?>plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
+
   <!-- Bootstrap 4 -->
-  <script src="<?php echo base_url('assets/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- jQuery datatables -->
-  <script src="<?php echo base_url('assets/') ?>DataTables/DataTables/js/jquery.dataTables.min.js"></script>
+  <script src="<?php echo base_url('assets/') ?>DataTables/DataTables/js/jquery.dataTables.js"></script>
   <script src="<?php echo base_url('assets/') ?>DataTables/DataTables/js/datatables.bootstrap4.min.js"></script>
+  <!-- jQuery datatables -->
+  <script src="<?php echo base_url('assets/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- ChartJS -->
   <script src="<?php echo base_url('assets/') ?>plugins/chart.js/Chart.min.js"></script>
   <!-- Sparkline -->
-  <script src="<?php echo base_url('assets/') ?>plugins/sparklines/sparkline.js"></script>
   <!-- JQVMap -->
   <script src="<?php echo base_url('assets/') ?>plugins/jqvmap/jquery.vmap.min.js"></script>
   <script src="<?php echo base_url('assets/') ?>plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
   <!-- jQuery Knob Chart -->
   <script src="<?php echo base_url('assets/') ?>plugins/jquery-knob/jquery.knob.min.js"></script>
+  <script src="<?php echo base_url('assets/') ?>plugins/sparklines/sparkline.js"></script>
   <!-- daterangepicker -->
   <script src="<?php echo base_url('assets/') ?>plugins/moment/moment.min.js"></script>
   <script src="<?php echo base_url('assets/') ?>plugins/daterangepicker/daterangepicker.js"></script>
@@ -206,25 +202,73 @@
   <script src="<?php echo base_url('assets/') ?>plugins/sweetalert2/sweetalert2.all.min.js"></script>
 
   <script type="text/javascript">
+    let method, table;
     $(document).ready(function() {
-      $('#table').DataTable();
-			// Cek Error
-			<?php if ($this->session->flashdata('error')) {?>
-				Swal.fire({
-					icon: 'error',
-					title: 'Row in Excel is Null Or Empty Field',
-					text: <?= $this->session->flashdata('error') ?>,
-				})
-			<?php }?>
-			// Jika Success 
-			<?php if ($this->session->flashdata('success')) {?>
-				Swal.fire({
-					icon: 'error',
-					title: 'Data is Success inserting',
-					text: <?= $this->session->flashdata('success') ?>,
-				})
-			<?php }?>
+      table = $('#table').DataTable({
+        // "processing": true,
+        // "serverSide": true,
+        // "ajax": {
+        //   "url": "<?= site_url('/api') ?>",
+        //   "type": 'POST'
+        // },
+        // //Set column definition initialisation properties.
+        // columns: [{
+        //     data: "ID"
+        //   },
+        //   {
+        //     data: "Company_Name",
+        //   },
+        //   {
+        //     data: "First_Name"
+        //   },
+        //   {
+        //     data: "Last_Name"
+        //   },
+        //   {
+        //     data: "Valid_Check",
+        //     orderable: true
+        //   },
+        // ],
+        // columnDefs: [{
+        //   'targets': 0,
+        //   'searchable': true,
+        //   'orderable': true,
+        //   search: true
+        // }],
+
+        "bServerSide": true,
+        "bProcessing": true,
+        "sPaginationType": "full_numbers",
+        "bFilter": true,
+        "sServerMethod": "POST",
+        "sAjaxSource": "<?= site_url('/api') ?>",
+        "iDisplayLength": 5,
+        "aLengthMenu": [
+          [5, 25, 50, -1],
+          [5, 25, 50, "All"]
+        ],
+        "sEcho": 1,
+        
+
+      });
+      // Cek Error
+      <?php if ($this->session->flashdata('error')) { ?>
+        Swal.fire({
+          icon: 'error',
+          title: 'Row in Excel is Null Or Empty Field',
+          text: <?= $this->session->flashdata('error') ?>,
+        })
+      <?php } ?>
+      // Jika Success 
+      <?php if ($this->session->flashdata('success')) { ?>
+        Swal.fire({
+          icon: 'error',
+          title: 'Data is Success inserting',
+          text: <?= $this->session->flashdata('success') ?>,
+        })
+      <?php } ?>
     });
   </script>
 </body>
+
 </html>
