@@ -13,6 +13,13 @@
 */
 class Upload_m extends CI_Model
 {
+
+	/**
+	 * @return Json
+	 * 
+	 * For Data Table
+	 * 
+	 */
 	// start datatables
 	var $column_order = array(null, 'Company_Name', 'First_Name', 'Last_Name', 'Valid_Check', 'Uploaded_By', 'Created_At'); //set column field database for datatable orderable
 	var $column_search = array('Company_Name', 'First_Name', 'Last_Name', 'Valid_Check', 'Uploaded_By', 'Created_At'); //set column field database for datatable searchable
@@ -43,14 +50,32 @@ class Upload_m extends CI_Model
 		// 	$this->db->order_by(key($order), $order[key($order)]);
 		// }
 	}
+
+	// Ini Untuk User
 	function get_datatables()
 	{
 		$this->_get_datatables_query();
 		if (@$_POST['length'] != -1)
 			$this->db->limit(@$_POST['length'], @$_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
+			$this->db->where('Uploaded_By' , $this->session->userdata('username'));
+			$query = $this->db->get();
+			return $query->result();
 	}
+
+
+	function get_datatables_admin()
+	{
+		$this->_get_datatables_query();
+		if (@$_POST['length'] != -1)
+			$this->db->limit(@$_POST['length'], @$_POST['start']);
+			$query = $this->db->get();
+			return $query->result();
+	}
+
+
+
+
+
 	function count_filtered()
 	{
 		$this->_get_datatables_query();
@@ -62,7 +87,15 @@ class Upload_m extends CI_Model
 		$this->db->from('data_uploaded');
 		return $this->db->count_all_results();
 	}
-	// end datatables
+
+
+	/**
+	 * @return Json
+	 * 
+	 * For Data Table
+	 * 
+	 */
+
 	public function insert_multiple($data)
 	{
 		$this->db->insert_batch('data_uploaded', $data);

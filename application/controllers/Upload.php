@@ -3,6 +3,41 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Upload extends CI_Controller
 {
+
+    function get_ajax_admin()
+    {
+        $this->load->model('Upload_m');
+        $list = $this->Upload_m->get_datatables_admin();
+        $data = array();
+        $no = @$_POST['start'];
+        foreach ($list as $item) {
+            $no++;
+            $row = array();
+
+            $row[] = $no . ".";
+            $row[] = $item->Company_Name;
+            $row[] = $item->First_Name;
+            $row[] = $item->Last_Name;
+            $row[] = $item->Valid_Check;
+            $row[] = $item->Uploaded_By;
+            $row[] = date('d F Y', strtotime($item->Created_At));
+            $row[] = '<a href="' . site_url('data/edit_database/' . $item->ID) . '" class="btn btn-warning btn-flat btn-small"><i class="fas fa-pencil-alt"></i></a>
+            <a href="' . site_url('data/del_process/'). $item->ID . '"class="btn btn-danger btn-flat btn-small"><i class="fas fa-trash-alt"></i></a>';
+
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => @$_POST['draw'],
+            "recordsTotal" => $this->Upload_m->count_all(),
+            "recordsFiltered" => $this->Upload_m->count_filtered(),
+            "data" => $data,
+        );
+        // output to json format
+        echo json_encode($output);
+    }
+
+
+    // User 
     function get_ajax()
     {
         $this->load->model('Upload_m');

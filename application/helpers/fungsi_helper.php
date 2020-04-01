@@ -16,3 +16,6 @@ function check_not_login()
         redirect('auth/login');
     }
 }
+
+
+

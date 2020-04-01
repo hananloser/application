@@ -8,10 +8,7 @@ class API extends CI_Controller
 
     public function index()
     {
-        $this->load->library('datatables');
-        $this->datatables->select("*", true);
-        $this->datatables->from('data_uploaded');
-        return print_r($this->datatables->generate());
+        echo $this->session->userdata('username');
     }
 }
 

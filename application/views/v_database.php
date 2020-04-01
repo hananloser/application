@@ -60,7 +60,7 @@
                                             "serverSide": true,
                                             "pageLength" : 25,
                                             "ajax": {
-                                                "url": "<?= site_url('upload/get_ajax') ?>",
+                                                "url": "<?= site_url('upload/get_ajax_admin') ?>",
                                                 "type": "POST",
                                             },
                                             "scrollY": 200,
