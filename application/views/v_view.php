@@ -43,7 +43,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <tr>
                                 <script>
                                     $(document).ready(function() {
@@ -55,7 +54,7 @@
                                                 "type": "POST",
                                             },
                                             "scrollY": 200,
-                                            "scroller": {
+                                            "scroller": {   
                                                 loadingIndicator: true,
                                             },
                                             "deferRender": true,

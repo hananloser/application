@@ -170,13 +170,8 @@
   </div>
   <!-- ./wrapper -->
 
-
-
-
-
   <!--###-->
   <!-- jQuery -->
-<<<<<<< HEAD
   <script src="<?php echo base_url('assets/') ?>plugins/jquery/jquery.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
 
@@ -186,12 +181,8 @@
   <!-- jQuery datatables -->
   <script src="<?php echo base_url('assets/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- ChartJS -->
-=======
 
-  <!-- Bootstrap 4 -->
-  <script src="<?php echo base_url('assets/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
->>>>>>> 0e9bc682abc5651ee4edbbfbc67cef8c144ec8ad
   <script src="<?php echo base_url('assets/') ?>plugins/chart.js/Chart.min.js"></script>
   <!-- Sparkline -->
   <!-- JQVMap -->
@@ -220,67 +211,8 @@
   <script src="<?php echo base_url('assets/') ?>plugins/sweetalert2/sweetalert2.all.min.js"></script>
 
   <script type="text/javascript">
-    let method, table;
     $(document).ready(function() {
-<<<<<<< HEAD
-      table = $('#table').DataTable({
-        "processing": true,
-        "serverSide": true,
-        searchable: true,
-        "ajax": {
-          "url": "<?= site_url('/api') ?>",
-          "type": 'POST'
-        },
-        //Set column definition initialisation properties.
-        columns: [{
-            data: "ID"
-          },
-          {
-            data: "Company_Name",
-          },
-          {
-            data: "First_Name"
-          },
-          {
-            data: "Last_Name"
-          },
-          {
-            data: "Valid_Check",
-            orderable: true
-          },
-        ],
-        columnDefs: [{
-          'targets': 0,
-          'orderable': true,
-          search: true
-        }],
-        // "bServerSide": true,
-        // "bProcessing": true,
-        // "sPaginationType": "full_numbers",
-        // "bFilter": true,
-        // "sServerMethod": "POST",
-        // "sAjaxSource": "<?= site_url('/api') ?>",
-        // "iDisplayLength": 5,
-        // "aLengthMenu": [
-        //   [5, 25, 50, -1],
-        //   [5, 25, 50, "All"]
-        // ],
-        // "sEcho": 1,
-        // 'fnServerData': function(sSource, aoData, fnCallback) {
-        //   $.ajax({
-        //     'dataType': 'json',
-        //     'type': 'POST',
-        //     'url': sSource,
-        //     'data': aoData,
-        //     'success': fnCallback
-        //   }); //end of ajax
-
-        // }
-
-      });
       // Cek Error
-=======
->>>>>>> 0e9bc682abc5651ee4edbbfbc67cef8c144ec8ad
       <?php if ($this->session->flashdata('error')) { ?>
         Swal.fire({
           icon: 'error',

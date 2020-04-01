@@ -159,11 +159,11 @@ class Upload extends CI_Controller
             $this->load->model('Upload_m');
             $process = $this->Upload_m->insert_multiple($new);
             unlink(realpath('excel/' . $data_upload['file_name']));
-            // $this->del_empty_row();
+
             if (!$process) {
+                $this->delduplicate();
                 $this->session->set_flashdata('success', $count);
                 redirect('view/userview');
-                $this->delduplicate();
             } else {
                 $this->session->set_flashdata('error', 'Field cannot is Empty Select the File');
                 redirect('Dashboard/index');
