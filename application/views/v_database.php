@@ -20,23 +20,26 @@
 
     <!-- Default box -->
     <div class="card">
-        <!--hapus-->
-        <!--<div class="card-header">
-            <a href="<?= site_url('data/export_excel') ?>" class="btn btn-success btn-flat">
-                <i class="fas fa-file-excel"></i> Excell
-            </a>
-        </div>-->
         <div class="card-header">
+            <a href="<?= site_url('data/export_excel') ?>" class="btn btn-success btn-flat">
+                <i class="fas fa-file-excel"></i> Export All Data
+            </a>
             <button type="button" class="btn btn-success btn-flat" data-toggle="modal" data-target="#modal-default">
-                <i class="fas fa-file-excel"></i> Export To Excell
+                <i class="fas fa-file-excel"></i> Export With Date Filtering
+            </button>
+            <button type="button" class="btn btn-success btn-flat" data-toggle="modal" data-target="#modal-default-2">
+                <i class="fas fa-file-excel"></i> Export By User Uploaded
+            </button>
+            <button type="button" class="btn btn-success btn-flat" data-toggle="modal" data-target="#modal-default-3">
+                <i class="fas fa-file-excel"></i> Export By campaign ID
             </button>
         </div>
         <div class="card-body">
             <div class="box">
                 <div class="box-body table-responsive">
                     <!--  -->
-                    <table id="table" class="table table-hover table-striped" name="user_table">
-                        <thead class="table table-bordered">
+                    <table id="table1" class="table table-hover table-striped display nowrap" name="user_table" style="width:100%">
+                        <thead>
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Company Name</th>
@@ -49,31 +52,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $no = 1;
-                            foreach ($row as $u) {
-                            ?>
-                                <tr>
-                                    <th scope="row"><?php echo $no++ ?>.</th>
-                                    <td><?php echo $u->Company_Name ?></td>
-                                    <td><?php echo $u->First_Name ?></td>
-                                    <td><?php echo $u->Last_Name ?></td>
-                                    <td><?php echo $u->Valid_Check ?></td>
-                                    <td><?php echo $u->Uploaded_By ?></td>
-                                    <td><?php echo date('d F Y', strtotime($u->Created_At)) ?></td>
-                                    <td>
-                                        <form action="<?= site_url('data/del_process') ?>" method="post">
-                                            <a href="<?= site_url('data/edit_database/' . $u->ID) ?>" class="btn btn-primary btn-flat">
-                                                <i class="fas fa-pen-alt"></i>
-                                            </a>
-                                            <input type="hidden" name="id" value="<?= $u->ID ?>">
-                                            <button class="btn btn-danger btn-flat">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            <?php } ?>
+                            <tr>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('#table1').DataTable({
+                                            "processing": true,
+                                            "serverSide": true,
+                                            "ajax": {
+                                                "url": "<?= site_url('upload/get_ajax') ?>",
+                                                "type": "POST",
+                                            },
+                                            "scrollY": 200,
+                                            "scroller": {
+                                                loadingIndicator: true,
+                                            },
+                                            "deferRender": true,
+                                            "responsive": true,
+                                        });
+                                    });
+                                </script>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -137,6 +135,74 @@
                 <a href="<?= site_url('data/export_excel') ?>" class="btn btn-success btn-flat">
                     <i class="fas fa-file-excel"></i> Export All Data
                 </a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- /.modal -->
+<div class="modal fade" id="modal-default-2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Export Data With User filter</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="<?= site_url('data/export_excel_by_user') ?>" method="post">
+                    <div class="input-group">
+                        <select class="custom-select" id="S
+                        electOption" name="value">
+                            <?php
+                            $tempArr = array_unique(array_column($row, 'Uploaded_By'));
+                            $arr = array_intersect_key($row, $tempArr);
+                            foreach ($arr as $a) { ?>
+                                # code...
+                                <option value="<?php echo $a->Uploaded_By ?>"><?php echo $a->Uploaded_By ?></option>
+                            <?php } ?>
+                        </select>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">Export</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- /.modal -->
+<div class="modal fade" id="modal-default-3">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Export Data With Camp ID Filter</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="<?= site_url('data/export_excel_by_campaign_ID') ?>" method="post">
+                    <div class="input-group">
+                        <select class="custom-select" id="inputGroupSelect04" name="value">
+                            <?php
+                            // $row = array_unique($row);
+                            foreach ($row as $u) { ?>
+                                # code...
+                                <option value="<?php echo $u->Campaign_ID ?>"><?php echo $u->Campaign_ID ?></option>
+                            <?php } ?>
+                        </select>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">Export</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <!-- /.modal-content -->

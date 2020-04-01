@@ -31,7 +31,11 @@
             <div class="box">
                 <div class="box-body table-responsive">
                     <!--  -->
+<<<<<<< HEAD
                     <table id="table" class="table" style="width:100%" name="user_table">
+=======
+                    <table id="table3" class="table table-hover table-striped display nowrap" name="user_table">
+>>>>>>> 0e9bc682abc5651ee4edbbfbc67cef8c144ec8ad
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -42,7 +46,29 @@
                             </tr>
                         </thead>
                         <tbody>
+<<<<<<< HEAD
 
+=======
+                            <tr>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('#table3').DataTable({
+                                            "processing": true,
+                                            "serverSide": true,
+                                            "ajax": {
+                                                "url": "<?= site_url('upload/get_ajax') ?>",
+                                                "type": "POST",
+                                            },
+                                            "scrollY": 200,
+                                            "scroller": {
+                                                loadingIndicator: true,
+                                            },
+                                            "deferRender": true,
+                                        });
+                                    });
+                                </script>
+                            </tr>
+>>>>>>> 0e9bc682abc5651ee4edbbfbc67cef8c144ec8ad
                         </tbody>
                         <tfoot>
                             <tr>

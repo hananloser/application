@@ -18,7 +18,7 @@ class Data extends CI_Controller
     }
     public function del_process()
     {
-        $id = $this->input->post('id');
+        $id = $this->input->post('ID');
         $this->upload_m->del($id);
         if ($this->db->affected_rows() > 0) {
             # code...
@@ -27,7 +27,7 @@ class Data extends CI_Controller
 			</script>";
         }
         echo
-        "<script>
+            "<script>
 			window.location='" . site_url('data') . "';
 		</script>";
     }
@@ -100,7 +100,7 @@ class Data extends CI_Controller
 			</script>";
         }
         echo
-        "<script>
+            "<script>
 		window.location='" . site_url('data') . "';
 		</script>";
     }

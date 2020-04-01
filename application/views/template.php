@@ -138,7 +138,17 @@
       </div>
       <!-- /.sidebar -->
     </aside>
-
+    <script src="<?php echo base_url('assets/') ?>plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="<?php echo base_url('assets/') ?>plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+      $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- jQuery datatables -->
+    <script src="<?php echo base_url('assets/') ?>DataTables/DataTables/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url('assets/') ?>DataTables/DataTables/js/datatables.bootstrap4.min.js"></script>
+    <!-- ChartJS -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <?php echo $contents ?>
@@ -166,6 +176,7 @@
 
   <!--###-->
   <!-- jQuery -->
+<<<<<<< HEAD
   <script src="<?php echo base_url('assets/') ?>plugins/jquery/jquery.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
 
@@ -175,6 +186,12 @@
   <!-- jQuery datatables -->
   <script src="<?php echo base_url('assets/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- ChartJS -->
+=======
+
+  <!-- Bootstrap 4 -->
+  <script src="<?php echo base_url('assets/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+>>>>>>> 0e9bc682abc5651ee4edbbfbc67cef8c144ec8ad
   <script src="<?php echo base_url('assets/') ?>plugins/chart.js/Chart.min.js"></script>
   <!-- Sparkline -->
   <!-- JQVMap -->
@@ -205,6 +222,7 @@
   <script type="text/javascript">
     let method, table;
     $(document).ready(function() {
+<<<<<<< HEAD
       table = $('#table').DataTable({
         "processing": true,
         "serverSide": true,
@@ -261,6 +279,8 @@
 
       });
       // Cek Error
+=======
+>>>>>>> 0e9bc682abc5651ee4edbbfbc67cef8c144ec8ad
       <?php if ($this->session->flashdata('error')) { ?>
         Swal.fire({
           icon: 'error',
