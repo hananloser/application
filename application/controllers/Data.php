@@ -16,10 +16,12 @@ class Data extends CI_Controller
         $data['row'] = $this->upload_m->view_list()->result();
         $this->template->load('template', 'v_database', $data);
     }
-    public function del_process()
+    public function del_process($id)
     {
-        $id = $this->input->post('ID');
-        $this->upload_m->del($id);
+        $idData = $this->uri->segment(3);
+        $this->upload_m->del($idData);
+
+        
         if ($this->db->affected_rows() > 0) {
             # code...
             echo "<script>

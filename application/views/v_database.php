@@ -58,6 +58,7 @@
                                         $('#table1').DataTable({
                                             "processing": true,
                                             "serverSide": true,
+                                            "pageLength" : 25,
                                             "ajax": {
                                                 "url": "<?= site_url('upload/get_ajax') ?>",
                                                 "type": "POST",
