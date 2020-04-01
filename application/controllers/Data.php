@@ -16,7 +16,7 @@ class Data extends CI_Controller
         $data['row'] = $this->upload_m->view_list()->result();
         $this->template->load('template', 'v_database', $data);
     }
-    public function del_process($id)
+    public function del_process()
     {
         $idData = $this->uri->segment(3);
         $this->upload_m->del($idData);

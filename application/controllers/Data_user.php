@@ -35,7 +35,7 @@ class Data_user extends CI_Controller
 			$row[] = $item->user_email;
 			$row[] = $item->user_level == 1 ? "Admin" : "User";
 			$row[] = '<a href="' . site_url('data_user/edit/' . $item->user_id) . '" class="btn btn-warning btn-flat btn-small"><i class="fas fa-pencil-alt"></i></a>
-            <a href="' . site_url('data_user/del_process') . '"class="btn btn-danger btn-flat btn-small"><i class="fas fa-trash-alt"></i></a>';
+            <a href="' . site_url('data_user/del_process/') .$item->user_id. '"class="btn btn-danger btn-flat btn-small"><i class="fas fa-trash-alt"></i></a>';
 			$data[] = $row;
 		}
 		$output = array(
@@ -68,7 +68,7 @@ class Data_user extends CI_Controller
 	}
 	public function del_process()
 	{
-		$id = $this->input->post('user_id');
+		$id = $this->uri->segment(3);
 		$this->user_m->del($id);
 		if ($this->db->affected_rows() > 0) {
 			# code...
