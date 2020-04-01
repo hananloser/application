@@ -31,7 +31,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?php echo base_url('assets/') ?>plugins/summernote/summernote-bs4.css">
 
-	<link rel="stylesheet" href="<?php echo base_url('assets/') ?>plugins/sweetalert2/sweetalert2.css">
+  <link rel="stylesheet" href="<?php echo base_url('assets/') ?>plugins/sweetalert2/sweetalert2.css">
 
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -72,7 +72,7 @@
             <img src="<?php echo base_url('assets/') ?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?=$this->fungsi->user_login()->user_company_name?></a>
+            <a href="#" class="d-block"><?= $this->fungsi->user_login()->user_company_name ?></a>
           </div>
         </div>
 
@@ -90,35 +90,35 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <?php if ($this->session->userdata('level') == 1) {?>
+                <?php if ($this->session->userdata('level') == 1) { ?>
                   <li class="nav-item">
-                    <a href="<?=site_url('dashboard/manage_user')?>" class="nav-link">
+                    <a href="<?= site_url('dashboard/manage_user') ?>" class="nav-link">
                       <i class="fas fa-users-cog nav-icon"></i>
                       <p>Manage User</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="<?=site_url('dashboard/manage_data')?>" class="nav-link">
+                    <a href="<?= site_url('dashboard/manage_data') ?>" class="nav-link">
                       <i class="fas fa-database nav-icon"></i>
                       <p>Manage Database</p>
                     </a>
                   </li>
-                <?php }?>
+                <?php } ?>
                 <!--sesi ini membatasi hak akses user, cek kode pada controller auth/login, periksa juga pada helper-->
-                <?php if ($this->session->userdata('level') == 2) {?>
+                <?php if ($this->session->userdata('level') == 2) { ?>
                   <li class="nav-item">
-                    <a href="<?=site_url('dashboard/go_upload')?>" class="nav-link">
+                    <a href="<?= site_url('dashboard/go_upload') ?>" class="nav-link">
                       <i class="fas fa-upload nav-icon"></i>
                       <p>Upload Data</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="<?=site_url('dashboard/view_list')?>" class="nav-link">
+                    <a href="<?= site_url('dashboard/view_list') ?>" class="nav-link">
                       <i class="fas fa-eye nav-icon"></i>
                       <p>View list</p>
                     </a>
                   </li>
-                <?php }?>
+                <?php } ?>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="fas fa-user nav-icon"></i>
@@ -126,7 +126,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?=site_url('auth/logout')?>" class="nav-link">
+                  <a href="<?= site_url('auth/logout') ?>" class="nav-link">
                     <i class="fas fa-sign-out-alt nav-icon"></i>
                     <p>Log-out</p>
                   </a>
@@ -138,7 +138,17 @@
       </div>
       <!-- /.sidebar -->
     </aside>
-
+    <script src="<?php echo base_url('assets/') ?>plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="<?php echo base_url('assets/') ?>plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+      $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- jQuery datatables -->
+    <script src="<?php echo base_url('assets/') ?>DataTables/DataTables/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url('assets/') ?>DataTables/DataTables/js/datatables.bootstrap4.min.js"></script>
+    <!-- ChartJS -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <?php echo $contents ?>
@@ -166,19 +176,10 @@
 
   <!--###-->
   <!-- jQuery -->
-  <script src="<?php echo base_url('assets/') ?>plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="<?php echo base_url('assets/') ?>plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
+
   <!-- Bootstrap 4 -->
   <script src="<?php echo base_url('assets/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- jQuery datatables -->
-  <script src="<?php echo base_url('assets/') ?>DataTables/DataTables/js/jquery.dataTables.min.js"></script>
-  <script src="<?php echo base_url('assets/') ?>DataTables/DataTables/js/datatables.bootstrap4.min.js"></script>
-  <!-- ChartJS -->
+
   <script src="<?php echo base_url('assets/') ?>plugins/chart.js/Chart.min.js"></script>
   <!-- Sparkline -->
   <script src="<?php echo base_url('assets/') ?>plugins/sparklines/sparkline.js"></script>
@@ -207,24 +208,23 @@
 
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#table').DataTable();
-			// Cek Error
-			<?php if ($this->session->flashdata('error')) {?>
-				Swal.fire({
-					icon: 'error',
-					title: 'Row in Excel is Null Or Empty Field',
-					text: <?= $this->session->flashdata('error') ?>,
-				})
-			<?php }?>
-			// Jika Success 
-			<?php if ($this->session->flashdata('success')) {?>
-				Swal.fire({
-					icon: 'error',
-					title: 'Data is Success inserting',
-					text: <?= $this->session->flashdata('success') ?>,
-				})
-			<?php }?>
+      <?php if ($this->session->flashdata('error')) { ?>
+        Swal.fire({
+          icon: 'error',
+          title: 'Row in Excel is Null Or Empty Field',
+          text: <?= $this->session->flashdata('error') ?>,
+        })
+      <?php } ?>
+      // Jika Success 
+      <?php if ($this->session->flashdata('success')) { ?>
+        Swal.fire({
+          icon: 'error',
+          title: 'Data is Success inserting',
+          text: <?= $this->session->flashdata('success') ?>,
+        })
+      <?php } ?>
     });
   </script>
 </body>
+
 </html>

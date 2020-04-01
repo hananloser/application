@@ -31,7 +31,7 @@
             <div class="box">
                 <div class="box-body table-responsive">
                     <!--  -->
-                    <table id="table" class="table table-hover table-striped " name="user_table">
+                    <table id="table2" class="table table-hover table-striped display nowrap" name="user_table">
                         <thead class="table table-bordered">
                             <tr>
                                 <th scope="col">No</th>
@@ -43,27 +43,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $no = 1;
-                            foreach ($row->result() as $data) { ?>
-                                <tr>
-                                    <th scope="row"><?= $no++ ?>.</th>
-                                    <td><?= $data->user_username ?></td>
-                                    <td><?= $data->user_company_name ?></td>
-                                    <td><?= $data->user_email ?></td>
-                                    <td><?= $data->user_level == 1 ? "Admin" : "User" ?></td>
-                                    <td>
-                                        <form action="<?= site_url('data_user/del_process') ?>" method="post">
-                                            <a href="<?= site_url('data_user/edit/' . $data->user_id) ?>" class="btn btn-primary">
-                                                <i class="fa fa-pen"></i>
-                                            </a>
-                                            <input type="hidden" name="user_id" value="<?= $data->user_id ?>">
-                                            <button class="btn btn-danger">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            <?php } ?>
+                            <tr>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('#table2').DataTable({
+                                            "processing": true,
+                                            "serverSide": true,
+                                            "ajax": {
+                                                "url": "<?= site_url('data_user/get_ajax') ?>",
+                                                "type": "POST",
+                                            },
+                                            "scrollY": 200,
+                                            "scroller": {
+                                                loadingIndicator: true,
+                                            },
+                                            "deferRender": true,
+                                            "responsive": true,
+                                        });
+                                    });
+                                </script>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -78,19 +77,3 @@
     <!-- /.card -->
 
 </section>
-<script>
-    $(document).ready(function() {
-        var data = [];
-        for (var i = 0; i < 50000; i++) {
-            data.push([i, i, i, i, i]);
-        }
-
-        $('#table').DataTable({
-            data: data,
-            deferRender: true,
-            scrollY: 200,
-            scrollCollapse: true,
-            scroller: true
-        });
-    });
-</script>

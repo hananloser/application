@@ -18,6 +18,35 @@ class Data_user extends CI_Controller
 		check_not_login();
 		$this->load->model('user_m');
 	}
+	// datatabel controller
+	function get_ajax()
+	{
+		$this->load->model('User_m');
+		$list = $this->User_m->get_datatables();
+		$data = array();
+		$no = @$_POST['start'];
+		foreach ($list as $item) {
+			$no++;
+			$row = array();
+			// $row[] = $item->ID;
+			$row[] = $no . ".";
+			$row[] = $item->user_username;
+			$row[] = $item->user_company_name;
+			$row[] = $item->user_email;
+			$row[] = $item->user_level == 1 ? "Admin" : "User";
+			$row[] = '<a href="' . site_url('data_user/edit/' . $item->user_id) . '" class="btn btn-warning btn-flat btn-small"><i class="fas fa-pencil-alt"></i></a>
+            <a href="' . site_url('data_user/del_process') . '"class="btn btn-danger btn-flat btn-small"><i class="fas fa-trash-alt"></i></a>';
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" => @$_POST['draw'],
+			"recordsTotal" => $this->User_m->count_all(),
+			"recordsFiltered" => $this->User_m->count_filtered(),
+			"data" => $data,
+		);
+		// output to json format
+		echo json_encode($output);
+	}
 	public function index()
 	{
 		$this->template->load('template', 'v_add_user');
